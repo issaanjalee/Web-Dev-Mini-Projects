@@ -1,74 +1,75 @@
+const inputField = document.querySelector('input[type="text"]');
+const todoList = document.querySelector('.todo-list');
 let tasks = [];
-
-function addTask() {
-  const taskInput = document.getElementById("taskInput");
-  const task = taskInput.value.trim();
-  if (task) {
-    tasks.push({
-      id: Date.now(),
-      name: task,
-      completed: false,
-      completedAt: null,
-    });
-    taskInput.value = "";
-    renderTasks();
-  }
+function addTask(text) {
+    tasks.push({ text: text, completed: false, completedAt: null });
 }
-
 function renderTasks() {
-  const pendingTasks = document.getElementById("pendingTasks");
-  const completedTasks = document.getElementById("completedTasks");
+    todoList.innerHTML = '';
 
-  pendingTasks.innerHTML = "";
+    tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.classList.add('todo-item');
+        if (task.completed) {
+            li.classList.add('completed');
+        }
+        const textSpan = document.createElement('span');
+        textSpan.classList.add('text');
+        textSpan.innerText = task.text;
+        const actionsDiv = document.createElement('div');
+        actionsDiv.classList.add('actions');
+        if (task.completed) {
+            const completedAtSpan = document.createElement('span');
+            completedAtSpan.classList.add('completed-at');
+            completedAtSpan.innerText = new Date(task.completedAt).toLocaleString();
+            actionsDiv.appendChild(completedAtSpan);
+        } else {
+            const completeButton = document.createElement('button');
+            completeButton.innerText = '✓';
+            completeButton.addEventListener('click', () => {
+                tasks[index].completed = true;
+                tasks[index].completedAt = Date.now();
+                renderTasks();
+            });
+            actionsDiv.appendChild(completeButton);
+        }
 
-  completedTasks.innerHTML = "";
-  tasks.forEach((task) => {
-    const li = document.createElement("li");
-    li.innerText = task.name;
-    li.setAttribute("data-id", task.id);
-    li.addEventListener("click", toggleTask);
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'X';
+        deleteButton.addEventListener('click', () => {
+            tasks.splice(index, 1);
+            renderTasks();
+        });
 
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
-    deleteButton.addEventListener("click", deleteTask);
-    li.appendChild(deleteButton);
+        actionsDiv.appendChild(deleteButton);
 
-    if (task.completed) {
-      li.classList.add("completed");
-      const timeSpan = document.createElement("span");
-      timeSpan.innerText = formatTime(task.completedAt);
-      li.appendChild(timeSpan);
-      completedTasks.appendChild(li);
-    } else {
-      pendingTasks.appendChild(li);
+        li.appendChild(textSpan);
+        li.appendChild(actionsDiv);
+
+        todoList.appendChild(li);
+    });
+}
+inputField.addEventListener('keydown', event => {
+    if (event.keyCode === 13) {
+        addTask(event.target.value);
+        event.target.value = '';
+        renderTasks();
     }
-  });
-}
-
-function toggleTask(event) {
-  const id = parseInt(event.target.getAttribute("data-id"));
-  tasks.forEach((task) => {
-    if (task.id === id) {
-      task.completed = !task.completed;
-      task.completedAt = task.completed ? new Date() : null;
-    }
-  });
-  renderTasks();
-}
-
-function deleteTask(event) {
-  const id = parseInt(event.target.parentNode.getAttribute("data-id"));
-  tasks = tasks.filter((task) => task.id !== id);
-  renderTasks();
-}
-
-function formatTime(date) {
-  const options = {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  };
-  return date.toLocaleTimeString("en-US", options);
-}
+});
+const markAllButton = document.querySelector('#mark-all');
+markAllButton.addEventListener('click', () => {
+    tasks.forEach(task => {
+        if (!task.completed) {
+            task.completed = true;
+            task.completedAt = Date.now();
+        }
+    });
+    renderTasks();
+});
+const clearCompletedButton = document.querySelector('#clear-completed');
+clearCompletedButton.addEventListener('click', () => {
+    tasks = tasks.filter(task => !task.completed);
+    renderTasks();
+});
 
 renderTasks();

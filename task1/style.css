@@ -40,11 +40,9 @@ body {
   
   input {
 	background-color: transparent;
-	border: none;
+	border: #444;
 	color: #fff;
 	font-size: 24px;
-	text-align: right;
-
   }
   
   button {
