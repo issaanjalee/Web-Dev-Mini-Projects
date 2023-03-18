@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Black Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Calculator For Oasis Level 2 Task 1</h1>
+  <div class="calculator">
+	<div class="border"></div>
+		    <div class="display">
+      <input type="text" id="input" readonly>
+    </div>
+    <div class="container">
+
+      <button onclick="addInput('7')">7</button>
+      <button onclick="addInput('8')">8</button>
+      <button onclick="addInput('9')">9</button>
+      <button onclick="addInput('/')">÷</button>
+	
+	  <button onclick="addInput('4')">4</button>
+      <button onclick="addInput('5')">5</button>
+      <button onclick="addInput('6')">6</button>
+      <button onclick="addInput('*')">×</button>
+		
+	  <button onclick="addInput('1')">1</button>
+      <button onclick="addInput('2')">2</button>
+      <button onclick="addInput('3')">3</button>
+       <button onclick="addInput('-')">-</button>
+
+	   <button onclick="addInput('0')">0</button>
+      <button onclick="addInput('.')">.</button>
+	  <button onclick="clearInput()">AC</button>
+       <button onclick="addInput('+')">+</button>
+	
+      <button onclick="deleteInput()">DEL</button>
+	  <button class= "equal" onclick="calculate()">=</button>
+	</div>
+  </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

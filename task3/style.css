@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  button {
+    background-color: #4caf50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  li.completed {
+    color: gray;
+  }
+  
+  button.delete {
+    background-color: #f44336;
+    color: white; /* add this line to change the text color of the Delete button to white */
+  }

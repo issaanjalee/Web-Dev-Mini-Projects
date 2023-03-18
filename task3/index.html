@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <form>
+      <input type="text" id="taskInput" placeholder="Add task" />
+      <button type="button" onclick="addTask()">Add</button>
+    </form>
+    <div id="tasks">
+      <h2>Pending Tasks</h2>
+      <ul id="pendingTasks"></ul>
+      <h2>Completed Tasks</h2>
+      <ul id="completedTasks"></ul>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
